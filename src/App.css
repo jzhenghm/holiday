@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 70px;
+  padding: 20px;
+  color: white;
+}
+
+.App-option {
+  background-color: white;
+  border: 1px solid rgba(33, 68, 72, 0.59);
+  border-radius: 4px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  /* font-size: 12px; */
+  padding: 2px 2px;
+  margin: 0 2px;
+}
+
+.App-button:hover {
+  border: 1px solid;
+  color: #0051FF;
+}
+
+.App-textarea {
+  resize: none;
+  overflow-y: scroll;
+}
+
+table, td {
+  font-family: sans-serif;
+  font-size: 12px;
+  /* width: 100%;
+  for developing only */
+  /******************************/
+  /* border-collapse: collapse;
+  border: 1px solid red; */
+}
+
+.middle {
+  display: table-cell;
+  text-align: center;
+}
+
+.right {
+  display: table-cell;
+  text-align: right;
+}
