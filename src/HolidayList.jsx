@@ -1,58 +1,57 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
-//import {render} from 'react-dom'
-// import FilteredMultiSelect from 'react-filtered-multiselect'
-// const CULTURE_SHIPS = [
-//   {id: 1, name: '20161001'},
-//   {id: 2, name: '20161102'},
-//   {id: 11, name: '20161001'},
-//   {id: 22, name: '20161101'},
-//   {id: 31, name: '20161001'},
-//   {id: 42, name: '20161101'},
-//   {id: 249, name: '20161201'},
-//   {id: 250, name: '20161231'}
-// ]
-
-// class HolidayList extends Component {
-//   state = {selectedShips: []}
-
-//   handleDeselect(index) {
-//     var selectedShips = this.state.selectedShips.slice()
-//     selectedShips.splice(index, 1)
-//     this.setState({selectedShips})
-//   }
-
-//   handleSelectionChange = (selectedShips) => {
-//     this.setState({selectedShips})
-//   }
-
-//   render() {
-//     var {selectedShips} = this.state
-//     return <div>
-//       <FilteredMultiSelect
-//         onChange={this.handleSelectionChange}
-//         options={CULTURE_SHIPS}
-//         selectedOptions={selectedShips}
-//         textProp="name"
-//         valueProp="id"
-//         size="15"
-//       />
-//     </div>
-//   }
-// }
-// 'App-textarea'
 class HolidayList extends Component {
     constructor(props) {
     super(props);
+    this.createSelectItems = this.createSelectItems.bind(this);
+    this.state = {
+      holidays: []
+    }
   }
 
+  componentWillMount() {
+    var self = this;
+    axios.get('http://localhost/api/iquant/rest?action=holidays&date=20161125,20171231&currency=USD&operation=list&type=SWAP')
+    .then(function(response) {
+      var xml_str = response.data;
+      var resp_start = xml_str.indexOf("<response");
+      var id0_s = xml_str.indexOf("<", resp_start + 1);
+  
+      var resp_end = xml_str.indexOf("</response>");
+      var resp_len = resp_end - (id0_s);
+      var holidayStr = xml_str.substr(id0_s, resp_len);
+      var holidayRawStrs = holidayStr.split("\n").filter(s => s.length > 8);  // acturally should be more than 20 chars.
+      var holidays_ = holidayRawStrs.map(s => { 
+        var s_start = s.indexOf("<");
+        var r = s.substr(s_start + 6, 8);
+        console.log(s+" "+s_start+" "+r);
+        return r;
+       })
+       .sort();
+
+      self.setState({
+        holidays: holidays_
+      });
+    });
+  }
+
+  createSelectItems() {
+    let items = [];     
+    for (var i = 0; i<this.state.holidays.length; i++) {
+      items.push(<option key={i} value={this.state.holidays[i]}>{this.state.holidays[i]}</option>);
+    }
+    return items;
+  } 
+  
   render() {
     return (
-      <select mutiple size='14' cols='10'>
-          <option>20101010</option>
-          <option>20101210</option>
+      <select mutiple size='14'>
+        {this.createSelectItems()}
       </select>
     );
   }
 }
 export default HolidayList;
+
+

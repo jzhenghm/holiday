@@ -9,18 +9,23 @@ import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import './App.css'
 import HolidayList from './HolidayList.jsx'
-
+import Currency from './currency.jsx'
+import TradeType from './tradeType.jsx'
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/lib/Button';
-import DropdownButton from 'react-bootstrap/lib/Button';
-import MenuItem from 'react-bootstrap/lib/Button';
-import ButtonToolbar from 'react-bootstrap/lib/Button';
+import Select from "react-select";
 
 const format = 'YYYY-MM-DD HH:mm:ss';
 const cn = false; //location.search.indexOf('cn') !== -1;
+
+var tradeOption = [
+  {value: 'SWAP', label: 'SWAP'},
+  {value: 'CASH', label: 'CASH'},
+  {value: 'EQUITY', label: 'EQUITY'}
+]
 
 const now = moment();
 if (cn) {
@@ -32,7 +37,6 @@ if (cn) {
 function getFormat(time) {
   return time ? format : 'YYYY-MM-DD';
 }
-
 
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
@@ -68,7 +72,6 @@ function disabledDate(current) {
 }
 
 function enableCommit() {
-
 }
 
 var createReactClass = require('create-react-class');
@@ -193,7 +196,6 @@ const Test = createReactClass({
   },
 });
 
-
 function onStandaloneSelect(value) {
   console.log('onStandaloneSelect');
   console.log(value && value.format(format));
@@ -204,6 +206,9 @@ function onStandaloneChange(value) {
   console.log(value && value.format(format));
 }
 
+function getCurrency(value) {
+  console.log(value);
+}
 
 ReactDOM.render((<div
   style={{
@@ -214,77 +219,62 @@ ReactDOM.render((<div
   }}
 >
   <div>
+    <form>
     <div style={{ margin: 10 }}>
       <table>
         <tr>
-          <td colSpan='2'>
+          <td colspan='2'>
             <table>
               <tr>
-              <td>
-                 {/*  <ButtonToolbar>
-                <DropdownButton bsSize="small" title="Small button" id="dropdown-size-small">
-                  <MenuItem eventKey="1">Action</MenuItem>
-                  <MenuItem eventKey="2">Another action</MenuItem>
-                  <MenuItem eventKey="3">Something else here</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4">Separated link</MenuItem>
-                </DropdownButton>
-              </ButtonToolbar> */}
-                  <select className='App-option'>
-                    <option value='SWAP'>SWAP</option>
-                    <option value='CASH'>CASH</option>
-                    <option value='EQUITY'>EQUITY</option>
-                  </select>
-                  <select className='App-option'>
-                    <option value='USD'>USD</option>
-                    <option value='GBP'>GPB</option>
-                    <option value='CAD'>CAD</option>
-                  </select>
-                </td>
-                <td nowrap className='right'>United States - US Dollor - New York
-                </td>
+                <td> <TradeType />&nbsp; </td>     
+                <td> <Currency />&nbsp; </td>
               </tr>
             </table>
           </td>
         </tr>
         <tr>
           <td>
-            <Calendar
-              showWeekNumber={false}
-              locale={enUS}
-              defaultValue={now}
-              disabledTime={disabledTime}
-              showToday={false}
-              showDateInput={false}
-              formatter={getFormat(true)}
-              showOk={false}
-              timePicker={null}
-              onChange={onStandaloneChange}
-              disabledDate={false}
-              onSelect={onStandaloneSelect}
-            />
+            <table>
+              <tr>
+              <td>
+                <Calendar
+                  showWeekNumber={false}
+                  locale={enUS}
+                  defaultValue={now}
+                  disabledTime={disabledTime}
+                  showToday={false}
+                  showDateInput={false}
+                  formatter={getFormat(true)}
+                  showOk={false}
+                  timePicker={null}
+                  onChange={onStandaloneChange}
+                  disabledDate={false}
+                  onSelect={onStandaloneSelect}
+                />&nbsp; 
             </td>
             <td>
               <table>
                 <tr><td className='middle'><b>Holidays</b></td></tr>
-                {/* <tr><td><textarea className='App-textarea' rows='15' cols='10'></textarea></td></tr> */}
                 <tr><td><HolidayList /></td></tr>
-
               </table>
-          </td>
+            </td>
+            </tr>
+            </table>
+            </td>  
         </tr>
         <tr>
-          <td colSpan='2'>
-   
-            <Button bsStyle="primary" bsSize="small" active>Reload</Button>
-            <Button bsStyle='primary' bsSize='small'>Add Holiday</Button>
-            <Button bsStyle='primary' bsSize='small'>Remove Holiday</Button>
+          <td colspan='2'>
+            <Button bsStyle='primary' bsSize='small'>Reload</Button>&nbsp;
+            <Button bsStyle='primary' bsSize='small'>Add Holiday</Button>&nbsp;
+            <Button bsStyle='primary' bsSize='small'>Remove Holiday</Button>&nbsp;
             <Button bsStyle='primary' bsSize='small' disabled>Commit</Button>
-
           </td>
         </tr>
+        {/* <tr><td colspan='2'><Currency /></td></tr> */}
       </table>
+     
     </div>
     <div style={{ clear: 'both' }}></div>
+    </form>
   </div>
 </div>), document.getElementById('__react-content'));

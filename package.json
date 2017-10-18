@@ -1,12 +1,16 @@
 {
-  "name": "my-app",
+  "name": "holiday",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "react-select": "^1.0.0-rc.10",
+    "react-xml-parser": "^1.0.2",
+    "xmldom": "^0.1.27"
   },
   "scripts": {
     "start": "react-scripts start",
