@@ -21,12 +21,6 @@ import Select from "react-select";
 const format = 'YYYY-MM-DD HH:mm:ss';
 const cn = false; //location.search.indexOf('cn') !== -1;
 
-var tradeOption = [
-  {value: 'SWAP', label: 'SWAP'},
-  {value: 'CASH', label: 'CASH'},
-  {value: 'EQUITY', label: 'EQUITY'}
-]
-
 const now = moment();
 if (cn) {
   now.locale('zh-cn').utcOffset(8);
@@ -75,7 +69,7 @@ function enableCommit() {
 }
 
 var createReactClass = require('create-react-class');
-
+/*
 const Test = createReactClass({
   propTypes: {
     defaultValue: PropTypes.object,
@@ -194,7 +188,7 @@ const Test = createReactClass({
       </div>
     </div>);
   },
-});
+});*/
 
 function onStandaloneSelect(value) {
   console.log('onStandaloneSelect');
@@ -208,6 +202,10 @@ function onStandaloneChange(value) {
 
 function getCurrency(value) {
   console.log(value);
+}
+
+const TradeTypeSelect = () => {
+
 }
 
 ReactDOM.render((<div
@@ -226,8 +224,8 @@ ReactDOM.render((<div
           <td colspan='2'>
             <table>
               <tr>
-                <td> <TradeType />&nbsp; </td>     
-                <td> <Currency />&nbsp; </td>
+                <td> <TradeType /></td>     
+                <td> <Currency /></td>
               </tr>
             </table>
           </td>
@@ -250,12 +248,12 @@ ReactDOM.render((<div
                   onChange={onStandaloneChange}
                   disabledDate={false}
                   onSelect={onStandaloneSelect}
-                />&nbsp; 
+                />
             </td>
             <td>
               <table>
-                <tr><td className='middle'><b>Holidays</b></td></tr>
-                <tr><td><HolidayList /></td></tr>
+                <tr><th>&nbsp;&nbsp;&nbsp;&nbsp;Holidays</th></tr>
+                <tr><td><HolidayList cash='USD' tradeType='SWAP'/></td></tr>
               </table>
             </td>
             </tr>
@@ -264,15 +262,17 @@ ReactDOM.render((<div
         </tr>
         <tr>
           <td colspan='2'>
-            <Button bsStyle='primary' bsSize='small'>Reload</Button>&nbsp;
-            <Button bsStyle='primary' bsSize='small'>Add Holiday</Button>&nbsp;
-            <Button bsStyle='primary' bsSize='small'>Remove Holiday</Button>&nbsp;
-            <Button bsStyle='primary' bsSize='small' disabled>Commit</Button>
+            <table>
+              <tr>
+                <td><Button bsStyle='primary' bsSize='small'>Reload</Button></td>
+                <td><Button bsStyle='primary' bsSize='small'>Add Holiday</Button></td>
+                <td><Button bsStyle='primary' bsSize='small'>Remove Holiday</Button></td>
+                <td><Button bsStyle='primary' bsSize='small'disabled>Commit</Button></td>
+              </tr>
+            </table>
           </td>
         </tr>
-        {/* <tr><td colspan='2'><Currency /></td></tr> */}
-      </table>
-     
+      </table>     
     </div>
     <div style={{ clear: 'both' }}></div>
     </form>

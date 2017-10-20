@@ -26,25 +26,19 @@ class currency extends Component {
 
   render() {    
     return (
-      // <div className="currency">      
-        <div style={{ width: 280, fontSize: "12px"}}>
-          <table>
-            <tr>
-              <td>
-                <div style={{width: 70, height:30}}>
-                  <Select
-                    options={this.state.currencies.map(i =>
-                        { return { label: i.label, value: i.value }; })} 
-                    onChange={this.handleChange} 
-                    value={this.state.selectedValue}
-                    clearable={false} />
-                </div>
-              </td>
-              <td> {this.state.selectedValue} </td>
-            </tr>
-          </table>
-        </div>         
-      // </div>
+      <table>
+        <tr>
+          <td width ="70">
+            <Select
+              options={this.state.currencies.map(i =>
+                  { return { label: i.label, value: i.value }; })} 
+              onChange={this.handleChange} 
+              value={this.state.selectedValue}
+              clearable={false} />
+          </td>
+          <td> {this.state.selectedValue} </td>
+        </tr>
+      </table>
     )
   }
 }

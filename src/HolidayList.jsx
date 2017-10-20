@@ -6,14 +6,14 @@ class HolidayList extends Component {
     super(props);
     this.createSelectItems = this.createSelectItems.bind(this);
     this.state = {
-      holidays: []
+      holidays: [20171212]
     }
   }
 
   componentWillMount() {
     var self = this;
     axios.get('http://localhost/api/iquant/rest?action=holidays&date=20161125,20171231&currency=USD&operation=list&type=SWAP')
-    .then(function(response) {
+    .then((response) => {
       var xml_str = response.data;
       var resp_start = xml_str.indexOf("<response");
       var id0_s = xml_str.indexOf("<", resp_start + 1);
@@ -36,6 +36,11 @@ class HolidayList extends Component {
     });
   }
 
+  handleSearchChange(prop) {
+    const cash = prop.cash;
+    const tradeType = prop.tradeType;
+  }
+
   createSelectItems() {
     let items = [];     
     for (var i = 0; i<this.state.holidays.length; i++) {
@@ -43,15 +48,21 @@ class HolidayList extends Component {
     }
     return items;
   } 
+
+  handleChange(e) {
+    console.log(e.target.value);
+  }
   
   render() {
     return (
-      <select mutiple size='14'>
+      <select mutiple size='15'
+        onSelect={this.handleChange} >
         {this.createSelectItems()}
       </select>
     );
   }
 }
+
 export default HolidayList;
 
 
