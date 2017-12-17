@@ -17,7 +17,7 @@ class Currency extends Component {
         {value:'ARS', label:'ARS', desc:'Argentina - Peso - Buenos Ares'},  
         {value:'AUD', label:'AUD', desc:'Austrailia - Austrailian - Sydney'},        
         {value:'BEF', label:'BEF', desc:'Belgium - Belgium Franc - Brussele'},  
-        {value:'BEF1', label:'BEF1', desc:'Luxembourg - Belgium Franc - Luxembourg'},         
+        // {value:'BEF1', label:'BEF1', desc:'Luxembourg - Belgium Franc - Luxembourg'},         
         {value:'BRL', label:'BRL', desc:'Brazil - Plano Real - San Paulo'},  
         {value:'CLF', label:'CLF', desc:'Chile - Chilean Unidad De Fomento - Santiago'},  
         {value:'CAD', label:'CAD', desc:'Canada - Canadian Dollar - Toronto'},  
@@ -41,13 +41,6 @@ class Currency extends Component {
       selectedValue: 'USD'
     }
   }
-
-  createSelectItems = () => {
-    const items = this.state.currencies
-      .map(c => <span style="fontSize: 11; pandding: '5px 10px'"> <option value={c.value} >{c.value}</option> </span>)
-    console.log('currencies item:'+items)
-    return items;
-  } 
 
   filterDesc = (value) => { 
     let index = -1    

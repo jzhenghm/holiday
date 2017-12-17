@@ -17,7 +17,7 @@ class TradeType extends Component {
     autoBind(this);
     this.state = {
         types: [
-          {value: 'SWAP', label: 'SWAP'},
+          {"value": 'SWAP', label: 'SWAP'},
           {value: 'CASH', label: 'CASH'},
           {value: 'EQUITY', label: 'EQUITY'},
         ],       

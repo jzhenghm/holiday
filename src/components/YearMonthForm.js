@@ -1,40 +1,41 @@
-// import React from 'react';
-// import DayPicker from 'react-day-picker';
+import React from 'react';
+import 'react-day-picker/lib/style.css';
+import Select from "react-select"
 
-// import 'react-day-picker/lib/style.css';
+const currentYear = new Date().getFullYear();
+const fromMonth = new Date(currentYear, 0);
+const toMonth = new Date(currentYear + 10, 11);
 
-// const currentYear = new Date().getFullYear();
-// const fromMonth = new Date(currentYear, 0);
-// const toMonth = new Date(currentYear + 10, 11);
+// Component will receive date, locale and localeUtils props
+const YearMonthForm = ({ date, localeUtils, onChange }) => {
+  const months = localeUtils.getMonths();
 
-// // Component will receive date, locale and localeUtils props
-// const YearMonthForm = ({ date, localeUtils, onChange }) => {
-//   const months = localeUtils.getMonths();
+  const years = [];
+  for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
+    years.push(i);
+  }
 
-//   const years = [];
-//   for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
-//     years.push(i);
-//   }
+  const handleChange = (e) => {
+    const { year, month } = e.target.form;
+    onChange(new Date(year.value, month.value));
+  };
 
-//   const handleChange = function handleChange(e) {
-//     const { year, month } = e.target.form;
-//     onChange(new Date(year.value, month.value));
-//   };
+  return (
+    <form className="DayPicker-Caption">
+      <select style={{borderRadius: '4px', border: '1px solid #ccc'}} name="month" onChange={handleChange} value={date.getMonth()}>
+        {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
+      </select>
+      
 
-//   return (
-//     <form className="DayPicker-Caption">
-//       <select name="month" onChange={handleChange} value={date.getMonth()}>
-//         {months.map((month, i) => <option key={i} value={i}>{month}</option>)}
-//       </select>
-//       <select name="year" onChange={handleChange} value={date.getFullYear()}>
-//         {years.map((year, i) =>
-//           <option key={i} value={year}>
-//             {year}
-//           </option>
-//         )}
-//       </select>
-//     </form>
-//   );
-// }
+      <select style={{borderRadius: '4px', border: '1px solid #ccc'}} name="year" onChange={handleChange} value={date.getFullYear()}>
+        {years.map((year, i) =>
+          <option key={i} value={year}>
+            {year}
+          </option>
+        )}
+      </select>
+    </form>
+  );
+}
 
-// export default YearMonthForm
+export default YearMonthForm

@@ -22,8 +22,8 @@ class App extends Component {
             </tr>
             <tr>
               <td>
-                <div style={{width: '360px'}}>
-                  <div style={{display: 'inline-block'}}><HolidayCalendar /></div>
+                <div style={{width: '380px'}}>
+                  <div style={{display: 'inline-block', width: '220px'}}><HolidayCalendar /></div>
                   <div style={{display: 'inline-block', padding: '15px 5px', 'vertical-align': 'top'}}><HolidayList /></div>
                 </div>
               </td>  

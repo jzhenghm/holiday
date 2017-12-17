@@ -68,6 +68,11 @@ table, td {
 .select-up.Select-input {
   height: 20px; }
 
+.select.datepick {
+  border-radius: 4px;
+  border: 1px solid #ccc
+}  
+
 /**
  * React Select
  * ============
